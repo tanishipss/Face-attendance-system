@@ -210,7 +210,7 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 
 **Frontend**
 ```bash
-npm run build
+npm run 
 ```
 
 > Deploy frontend on **Vercel** or **Netlify**, backend on **Render** or **Railway**.
@@ -239,6 +239,4 @@ This project is for educational purposes. Feel free to fork and build on it.
 
 ---
 
-<div align="center">
-Made with ❤️ by <a href="https://github.com/tanishipss">Tanisha</a>
-</div>
+
