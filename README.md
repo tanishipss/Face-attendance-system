@@ -1,24 +1,35 @@
 # 🎓 Attendance Pro — AI-Powered Face Recognition System
 
-> **Upgraded from basic ML → production-grade deep learning system**
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-18+-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![DeepFace](https://img.shields.io/badge/DeepFace-FaceNet512-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+
+A full-stack face recognition attendance system powered by deep learning.  
+Built with **FastAPI** (backend) and **React.js** (frontend), enabling real-time attendance marking with liveness detection, analytics, and export features.
+
+</div>
 
 ---
 
-## 🚀 What's Upgraded
+## 🚀 Features
 
-| Feature | Before | After |
-|---|---|---|
-| Face Recognition | OpenCV LBPH (basic) | **DeepFace + FaceNet512** (deep learning) |
-| Storage | CSV files | **SQLite** (structured, scalable) |
-| Anti-Spoofing | ❌ None | **✅ Liveness detection** (texture, blur, gradient analysis) |
-| UI | Tkinter (desktop) | **Streamlit** (browser-based, modern) |
-| Architecture | Monolithic script | **FastAPI backend + Streamlit frontend** |
-| Auth | ❌ None | **JWT (Admin / Teacher roles)** |
-| Dashboard | ❌ None | **Real-time charts, gauges, stats** |
-| Export | CSV only | **Excel + CSV with one click** |
-| Email Alerts | ❌ None | **✅ SMTP alerts for low attendance** |
-| Embeddings | Retrain every time | **Stored .pkl embeddings (fast matching)** |
-| Logging | Print statements | **Structured logging to file + console** |
+| Feature | Description |
+|--------|-------------|
+| 🧠 **Face Recognition** | DeepFace + FaceNet512 for high-accuracy identification |
+| 🔐 **JWT Authentication** | Role-based access for Admin & Teacher |
+| 🛡️ **Liveness Detection** | Prevents spoofing via texture, blur & gradient analysis |
+| 📊 **Dashboard & Analytics** | Real-time stats and attendance insights |
+| 📁 **Attendance Management** | Manage sessions and records efficiently |
+| 📤 **Export Reports** | Download attendance as Excel or CSV |
+| 📧 **Email Alerts** | Automated alerts for low attendance |
+| 🗄️ **SQLite Database** | Lightweight structured storage |
+| ⚡ **Fast Matching** | Cosine similarity on stored embeddings |
+| 📝 **Structured Logging** | File + console logging |
 
 ---
 
@@ -27,56 +38,63 @@
 ```
 attendance_pro/
 ├── backend/
-│   ├── main.py                  # FastAPI app entry point
+│   ├── main.py
 │   ├── requirements.txt
 │   ├── api/
-│   │   ├── auth_routes.py       # JWT login, register, user management
-│   │   ├── face_routes.py       # Face registration + recognition + liveness
-│   │   ├── attendance_routes.py # Sessions, records, stats
-│   │   ├── admin_routes.py      # Student CRUD
-│   │   └── export_routes.py     # Excel/CSV export
+│   │   ├── auth_routes.py
+│   │   ├── face_routes.py
+│   │   ├── attendance_routes.py
+│   │   └── export_routes.py
 │   ├── database/
-│   │   └── db.py               # SQLite init, all tables
+│   │   └── db.py
 │   └── utils/
-│       └── email_alerts.py     # SMTP email notifications
 │
 ├── frontend/
-│   ├── app.py                   # Streamlit main app (login + routing)
-│   ├── requirements.txt
-│   └── pages/
-│       ├── dashboard.py         # KPIs, charts, gauge
-│       ├── take_attendance.py   # Live webcam + face recognition
-│       ├── register_face.py     # Face enrollment with liveness check
-│       ├── view_records.py      # Browse + export records
-│       ├── students.py          # Student management
-│       ├── subjects.py          # Subject management
-│       └── admin_panel.py       # User management
+│   ├── package.json
+│   ├── public/
+│   └── src/
 │
-├── embeddings/                  # Stored FaceNet512 embeddings (.pkl)
-├── face_db/                     # Reference face images
-├── logs/                        # Application logs
-├── .env.example                 # Environment config template
-├── start_windows.bat            # Windows launcher
-└── start.sh                     # Linux/Mac launcher
+├── embeddings/          # Stored face embeddings (auto-generated)
+├── face_db/             # Face images (auto-generated)
+├── logs/                # Application logs (auto-generated)
+├── .env.example
+├── start_windows.bat
+└── start.sh
 ```
 
 ---
 
-## ⚙️ Setup
+## ⚙️ Setup & Installation
 
-### Prerequisites
-- Python 3.10+
+### 📌 Prerequisites
+
+- Python **3.10+**
+- Node.js **v16+**
 - Webcam
-- 4GB+ RAM (for DeepFace model)
+- 4GB+ RAM
 
-### 1. Clone & setup
+---
+
+### 🔧 1. Clone the Repository
 
 ```bash
-# Copy .env.example to .env
+git clone https://github.com/tanishipss/Face-attendance-system.git
+cd Face-attendance-system
+```
+
+---
+
+### 🔐 2. Environment Setup
+
+```bash
 cp .env.example .env
 ```
 
-### 2. Backend
+> Update the values inside `.env` as needed (SMTP credentials, secret key, etc.)
+
+---
+
+### 🧠 3. Run the Backend (FastAPI)
 
 ```bash
 cd backend
@@ -84,20 +102,52 @@ pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 ```
 
-> **First run**: DeepFace will download FaceNet512 model (~90MB). Takes 1-2 min.
+| | URL |
+|---|---|
+| **Backend API** | http://localhost:8000 |
+| **API Docs (Swagger)** | http://localhost:8000/docs |
 
-### 3. Frontend
+---
+
+### 💻 4. Run the Frontend (React)
 
 ```bash
 cd frontend
-pip install -r requirements.txt
-streamlit run app.py
+npm install
+npm start
 ```
 
-### 4. Or use the launcher
+| | URL |
+|---|---|
+| **Frontend** | http://localhost:3000 |
 
-**Windows:** Double-click `start_windows.bat`
-**Linux/Mac:** `bash start.sh`
+---
+
+### 🔗 5. API Configuration
+
+Update the API base URL in `frontend/src/api.js`:
+
+```js
+const API_URL = "http://localhost:8000";
+```
+
+---
+
+## ▶️ Running the Application
+
+Run both services simultaneously in **two separate terminals**:
+
+**Terminal 1 — Backend**
+```bash
+cd backend
+uvicorn main:app --reload --port 8000
+```
+
+**Terminal 2 — Frontend**
+```bash
+cd frontend
+npm start
+```
 
 ---
 
@@ -107,62 +157,63 @@ streamlit run app.py
 |------|----------|----------|
 | Admin | `admin` | `admin123` |
 
-Create teacher accounts from Admin Panel.
+> ⚠️ Change the default password after first login.
 
 ---
 
-## 🔒 Anti-Spoofing Details
+## 🛡️ Liveness Detection
 
-The system implements basic liveness detection to prevent fake attendance:
+The system prevents fake/photo-based attendance using a multi-layer analysis:
 
-1. **LBP Texture Variance** — Printed photos have lower texture variance
-2. **Laplacian Blur Score** — Screens/photos appear blurrier than real faces
-3. **Gradient Energy** — Real faces have higher gradient energy
+- **Texture Analysis** — Local Binary Pattern (LBP) checks
+- **Blur Detection** — Laplacian variance scoring
+- **Gradient Energy** — Sobel-based sharpness measurement
 
-Combined score threshold: **0.35** (adjustable in `face_routes.py`)
-
-> 💡 For production: integrate [Silent-Face-Anti-Spoofing](https://github.com/minivision-ai/Silent-Face-Anti-Spoofing) for state-of-art results.
+> Threshold is configurable in the backend `face_routes.py`.
 
 ---
 
-## 📡 API Documentation
+## 📡 API Endpoints
 
-Once backend is running: `http://localhost:8000/docs`
+Full interactive documentation available at **http://localhost:8000/docs**
 
-Key endpoints:
-- `POST /api/auth/login` — Get JWT token
-- `POST /api/face/register` — Register face embedding
-- `POST /api/face/recognize` — Recognize face + mark attendance
-- `GET /api/attendance/stats/overview` — Dashboard stats
-- `GET /api/export/attendance/excel` — Download Excel report
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/auth/login` | Login and get JWT token |
+| `POST` | `/api/face/register` | Register a student's face |
+| `POST` | `/api/face/recognize` | Recognize face & mark attendance |
+| `GET` | `/api/attendance/stats/overview` | Get attendance statistics |
+| `GET` | `/api/export/attendance/excel` | Export attendance as Excel |
+
+---
+
+## 📧 Email Alerts Configuration
+
+Add these to your `.env` file:
+
+```env
+SMTP_USER=your@gmail.com
+SMTP_PASS=your-app-password
+ALERT_EMAIL=admin@example.com
+```
+
+> For Gmail, use an [App Password](https://support.google.com/accounts/answer/185833) instead of your regular password.
 
 ---
 
 ## 🌐 Deployment
 
-**Backend (Render / Railway):**
+**Backend**
 ```bash
-# Procfile
-web: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
-**Frontend (Streamlit Cloud):**
-1. Push frontend/ to GitHub
-2. Connect to [streamlit.io/cloud](https://streamlit.io/cloud)
-3. Set `API_URL` in secrets to your Render backend URL
-
----
-
-## 📧 Email Alerts
-
-Configure in `.env`:
-```
-SMTP_USER=your@gmail.com
-SMTP_PASS=your-app-password  # Generate at Google Account > App Passwords
-ALERT_EMAIL=principal@school.com
+**Frontend**
+```bash
+npm run build
 ```
 
-Call `send_attendance_alert()` from `utils/email_alerts.py` after computing low attendance.
+> Deploy frontend on **Vercel** or **Netlify**, backend on **Render** or **Railway**.
 
 ---
 
@@ -171,11 +222,23 @@ Call `send_attendance_alert()` from `utils/email_alerts.py` after computing low 
 | Layer | Technology |
 |-------|-----------|
 | Face Recognition | DeepFace + FaceNet512 |
-| Face Detection | MTCNN |
-| Backend | FastAPI + Uvicorn |
-| Database | SQLite (via stdlib) |
-| Frontend | Streamlit |
-| Charts | Plotly |
-| Auth | JWT (python-jose) |
+| Face Detection | MTCNN / OpenCV |
+| Backend | FastAPI |
+| Database | SQLite |
+| Frontend | React.js |
+| Charts | Chart.js / Recharts |
+| Authentication | JWT |
 | Export | openpyxl |
-| Logging | Python logging |
+| Logging | Python `logging` |
+
+---
+
+## 📄 License
+
+This project is for educational purposes. Feel free to fork and build on it.
+
+---
+
+<div align="center">
+Made with ❤️ by <a href="https://github.com/tanishipss">Tanisha</a>
+</div>
